@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PokeFinder</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>PokeFinder</header>
+    <form class="pokemonForm">
+      <label for="pokemonNumber">
+        <input type="number" name="pokemonNumber" id="pokemonNumber" />
+      </label>
+      <input type="submit" value="Buscar" />
+    </form>
+    <main>
+      <div class="container">
+        <div class="pokemonCard">
+          <div class="display">
+            <div class="nameId">
+              <p class="pokeName">???</p>
+              <p>#<span id="pokeId">???</span></p>
+            </div>
+            <div class="pokemonImg">
+              <img
+                src="./assets/pokemonShadow.png"
+                alt="pokemon"
+              />
+            </div>
+          </div>
+          <div class="stats">
+            <div class="measures">
+              <p>Height: <span id="height">??</span></p>
+              <p>Weight: <span id="weight">??</span></p>
+            </div>
+            <div class="types">
+              <div class="typeContainer">
+                <img src="./assets/question.svg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="./index.js"></script>
+  </body>
+</html>
