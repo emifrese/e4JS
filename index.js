@@ -26,7 +26,7 @@ const pokemonName = document.querySelector(".pokeName");
 const pokemonNumber = document.querySelector("#pokeId");
 const pokemonImg = document.querySelector(".pokemonImg").children[0];
 const pokemonHeight = document.querySelector("#height");
-const pokmeonWeight = document.querySelector("#weight");
+const pokemonWeight = document.querySelector("#weight");
 const pokemonTypes = document.querySelector(".types");
 
 pokemonCard.style.backgroundColor = "rgb(123,123,123)";
@@ -42,41 +42,55 @@ const pokemonData = (pokemon) => {
   };
 };
 
+const editCard = (name, id, newColor, height, weight, img) => {
+  pokemonName.innerHTML = name;
+  pokemonNumber.innerHTML = id;
+  pokemonCard.style.backgroundColor = `rgb(${newColor})`;
+  pokemonHeight.innerHTML = `${height / 10}m`;
+  pokemonWeight.innerHTML = `${weight / 10}kg`;
+  pokemonImg.setAttribute("src", img);
+};
+
+const insertTypes = (types) => {
+  types.forEach((type) => {
+    const pokemonTypeContainer = document.createElement("div");
+    const pokemonTypeImg = document.createElement("img");
+    pokemonTypeContainer.classList.add("typeContainer");
+    console.log(pokemonTypeContainer);
+    pokemonTypeImg.setAttribute("src", `./assets/${type.name}.svg`);
+    const pokeColor = typeColors[type.name];
+    pokemonTypeContainer.style.backgroundColor = `rgb(${pokeColor})`;
+    pokemonTypeContainer.style.boxShadow = `0 0 20px ${pokeColor}`;
+    pokemonTypeContainer.appendChild(pokemonTypeImg);
+    pokemonTypes.appendChild(pokemonTypeContainer);
+  });
+};
+
 const searchPokemon = async (number) => {
   try {
     const result = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}`);
     const data = await result.json();
     const { name, id, types, img, height, weight } = pokemonData(data);
     const newColor = typeColors[types[0].name];
-    pokemonName.innerHTML = name;
-    pokemonNumber.innerHTML = id;
-    pokemonCard.style.backgroundColor = `rgb(${newColor})`;
-    pokemonHeight.innerHTML = `${height / 10}m`;
-    pokmeonWeight.innerHTML = `${weight / 10}kg`;
-    pokemonImg.setAttribute("src", img);
     pokemonTypes.innerHTML = "";
-    // pokemonTypes.removeChild(pokemonTypes.children[0]);
-    types.forEach((type) => {
-      const pokemonTypeContainer = document.createElement("div");
-      const pokemonTypeImg = document.createElement("img");
-      pokemonTypeContainer.classList.add("typeContainer");
-      console.log(pokemonTypeContainer);
-      pokemonTypeImg.setAttribute("src", `./assets/${type.name}.svg`);
-      const pokeColor = typeColors[type.name];
-      pokemonTypeContainer.style.backgroundColor = `rgb(${pokeColor})`;
-      pokemonTypeContainer.style.boxShadow = `0 0 20px ${pokeColor}`;
-      pokemonTypeContainer.appendChild(pokemonTypeImg);
-      pokemonTypes.appendChild(pokemonTypeContainer);
-    });
+    editCard(name, id, newColor, height, weight, img);
+    insertTypes(types);
   } catch (error) {
-    console.log(error);
+    showModal("No encontramos ningun pokemon con asociado al numero");
   }
 };
 
 const pokemonHandler = (e) => {
   e.preventDefault();
 
-  searchPokemon(pokemonInput.value);
+  const { value } = pokemonInput;
+
+  if (value.trim() === "") {
+    showModal("Debe ingresar el número del pokemon que desa buscar");
+    return;
+  }
+
+  searchPokemon(value);
 };
 
 (() => {

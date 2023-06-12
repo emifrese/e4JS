@@ -1,0 +1,32 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+    height: 100vh;
+    background-color: rgba(200, 200, 200, 0.6)
+  }
+  
+  .modalContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+  }
+  
+  .modal {
+    animation-name: slideDown;
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    border-radius: 14px;
+    background-color: #fff;
+    position: fixed;
+    top: 10rem;
+    padding: 1rem;
+    z-index: 30;
+    text-align: center;
+    max-width: inherit;
+    max-height: 85%;
+  }

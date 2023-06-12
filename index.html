@@ -4,15 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PokeFinder</title>
+    <link rel="stylesheet" href="./modal.css">
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="overlay"></div>
     <header>PokeFinder</header>
     <form class="pokemonForm">
       <label for="pokemonNumber">
         <input type="number" name="pokemonNumber" id="pokemonNumber" />
       </label>
-      <input type="submit" value="Buscar" />
+      <!-- <input type="submit" value="Buscar" /> -->
+      <button>
+        <img src="./assets/pokeball.png" alt="">
+      </button>
     </form>
     <main>
       <div class="container">
@@ -43,6 +48,7 @@
         </div>
       </div>
     </main>
+    <script src="./modal.js"></script>
     <script src="./index.js"></script>
   </body>
 </html>
